@@ -3,15 +3,8 @@ import Dropzone from "react-dropzone";
 import { EditOutlined } from "@ant-design/icons";
 import axios from "axios";
 
-function FileUpload() {
+function FileUpload(props) {
   const [Images, setImages] = useState([]);
-
-  const deleteHandler = (image) => {
-    const currentIndex = Images.indexOf(image);
-    let newImages = [...Images];
-    newImages.splice(currentIndex, 1);
-    setImages(newImages);
-  };
 
   const dropHandler = (files) => {
     let formData = new FormData();
@@ -26,10 +19,19 @@ function FileUpload() {
     axios.post("/api/product/image", formData, config).then((response) => {
       if (response.data.success) {
         setImages([...Images, response.data.filePath]);
+        props.refreshFunction([...Images, response.data.filePath]);
       } else {
         alert("Failed to save the Image in Server");
       }
     });
+  };
+
+  const deleteHandler = (image) => {
+    const currentIndex = Images.indexOf(image);
+    let newImages = [...Images];
+    newImages.splice(currentIndex, 1);
+    setImages(newImages);
+    props.refreshFunction(newImages);
   };
 
   return (
