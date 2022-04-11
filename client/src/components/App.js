@@ -6,6 +6,7 @@ import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
+import UploadProductPage from "./views/UploadProductPage/UploadProductPage";
 import Footer from "./views/Footer/Footer";
 
 //null   Anyone Can go inside
@@ -21,6 +22,11 @@ function App() {
           <Route exact path="/" component={Auth(LandingPage, null)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
+          <Route
+            exact
+            path="/product/upload"
+            component={Auth(UploadProductPage, true)}
+          />
         </Switch>
       </div>
       {/* <Footer /> */}

@@ -43,7 +43,7 @@
 
 .menu__container .menu_rigth {
   float: right;
-  transform: translateY(30%);
+  transform: translateY(50%);
 }
 
 .menu__mobile-button {

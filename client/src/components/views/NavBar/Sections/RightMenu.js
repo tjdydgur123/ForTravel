@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Menu } from "antd";
+import { Affix, Button } from "antd";
 import axios from "axios";
 import { USER_SERVER } from "../../../Config";
 import { withRouter } from "react-router-dom";
@@ -21,25 +21,50 @@ function RightMenu(props) {
 
   if (user.userData && !user.userData.isAuth) {
     return (
-      <Menu mode={props.mode}>
-        <Menu.Item key="mail">
-          <a href="/login">Signin</a>
-        </Menu.Item>
-        <Menu.Item key="app">
-          <a href="/register">Signup</a>
-        </Menu.Item>
-      </Menu>
+      <div style={{ display: "flex" }}>
+        <Affix>
+          <Button
+            type="primary"
+            onClick={() => {
+              props.history.push("/login");
+            }}
+          >
+            Signin
+          </Button>
+        </Affix>
+        <div style={{ width: "15px" }} />
+        <Affix>
+          <Button
+            type="primary"
+            onClick={() => {
+              props.history.push("/register");
+            }}
+          >
+            Signup
+          </Button>
+        </Affix>
+      </div>
     );
   } else {
     return (
-      <Menu mode={props.mode}>
-        <Menu.Item key="upload">
-          <a href="/product/upload">Upload</a>
-        </Menu.Item>
-        <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Logout</a>
-        </Menu.Item>
-      </Menu>
+      <div style={{ display: "flex" }}>
+        <Affix>
+          <Button
+            type="primary"
+            onClick={() => {
+              props.history.push("/product/upload");
+            }}
+          >
+            Upload
+          </Button>
+        </Affix>
+        <div style={{ width: "15px" }} />
+        <Affix>
+          <Button type="primary" onClick={logoutHandler}>
+            Logout
+          </Button>
+        </Affix>
+      </div>
     );
   }
 }
