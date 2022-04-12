@@ -38,7 +38,7 @@
 
 .menu__container .menu_left {
   float: left;
-  transform: translateY(30%);
+  transform: translateY(50%);
 }
 
 .menu__container .menu_rigth {
