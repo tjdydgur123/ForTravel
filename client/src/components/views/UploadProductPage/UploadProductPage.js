@@ -42,10 +42,7 @@ function UploadProductPage(props) {
     setImages(newImages);
   };
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    console.log("HJeelo!!!");
-
+  const submitHandler = () => {
     if (!Title || !Describtion || !Price || !Continent || !Images) {
       return alert("Please fill out all the fields");
     }
@@ -56,7 +53,7 @@ function UploadProductPage(props) {
       description: Describtion,
       price: Price,
       images: Images,
-      continents: Continent,
+      continent: Continent,
     };
 
     axios.post("/api/product", body).then((response) => {
@@ -80,7 +77,7 @@ function UploadProductPage(props) {
         <h2>Upload Travel Product</h2>
       </div>
 
-      <Form onSubmitCapture={submitHandler}>
+      <Form onFinish={submitHandler}>
         <FileUpload refreshFunction={updateImages} />
         <br />
         <br />
