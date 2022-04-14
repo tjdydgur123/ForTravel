@@ -108,7 +108,16 @@ function LandingPage() {
   };
 
   const handleSearchTerm = (newSearchTerm) => {
+    let body = {
+      skip: 0,
+      limit: Limit,
+      filters: Filters, // bring the checked continents and price
+      searchTerm: newSearchTerm,
+    };
+
+    setSkip(0);
     setSearchTerm(newSearchTerm);
+    getProducts(body);
   };
 
   return (

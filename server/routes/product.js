@@ -44,9 +44,11 @@ router.post("/", (req, res) => {
 router.post("/products", (req, res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+  let term = req.body.searchTerm;
 
   let findArgs = {};
 
+  // handling continents and price filters
   for (let key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
       if (key === "price") {
@@ -62,17 +64,32 @@ router.post("/products", (req, res) => {
     }
   }
 
-  // popluate let you bring the writer's data in the other document
-  Product.find(findArgs)
-    .populate("writer")
-    .skip(skip)
-    .limit(limit)
-    .exec((err, productInfo) => {
-      if (err) return res.status(400).json({ success: false, err });
-      return res
-        .status(200)
-        .json({ success: true, productInfo, postSize: productInfo.length });
-    });
+  // handling searchTerm filter
+  if (term) {
+    Product.find(findArgs)
+      .find({ $text: { $search: term } }) // https://www.mongodb.com/docs/v3.6/reference/operator/query/text/#search-for-a-single-word
+      .populate("writer")
+      .skip(skip)
+      .limit(limit)
+      .exec((err, productInfo) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res
+          .status(200)
+          .json({ success: true, productInfo, postSize: productInfo.length });
+      });
+  } else {
+    // popluate let you bring the writer's data in the other document
+    Product.find(findArgs)
+      .populate("writer")
+      .skip(skip)
+      .limit(limit)
+      .exec((err, productInfo) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res
+          .status(200)
+          .json({ success: true, productInfo, postSize: productInfo.length });
+      });
+  }
 });
 
 module.exports = router;

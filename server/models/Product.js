@@ -39,6 +39,20 @@ const productSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+// https://www.mongodb.com/docs/v3.6/core/index-text/
+productSchema.index(
+  {
+    title: "text",
+    description: "text",
+  },
+  {
+    weights: {
+      title: 5,
+      description: 1,
+    },
+  }
+);
+
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = { Product };
