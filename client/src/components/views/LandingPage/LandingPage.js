@@ -5,6 +5,7 @@ import { RocketOutlined } from "@ant-design/icons";
 import ImageSlider from "../../utils/ImageSlider";
 import CheckBox from "./Section/CheckBox";
 import RadioBox from "./Section/RadioBox";
+import SearchFeature from "./Section/SearchFeature";
 import { continents, price } from "./Section/Datas";
 
 const { Meta } = Card;
@@ -20,6 +21,7 @@ function LandingPage() {
       price: [],
     },
   ]);
+  const [SearchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     let body = {
@@ -105,6 +107,10 @@ function LandingPage() {
     setFilters(newFilters);
   };
 
+  const handleSearchTerm = (newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+  };
+
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
@@ -112,8 +118,6 @@ function LandingPage() {
           Let's Travel Anywhere <RocketOutlined />
         </h2>
       </div>
-
-      {/* Filter */}
 
       <Row gutter={[16, 16]}>
         <Col lg={12} xs={24}>
@@ -135,8 +139,12 @@ function LandingPage() {
 
       {/* Search */}
       <br />
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <SearchFeature onUpdate={handleSearchTerm} value={SearchTerm} />
+      </div>
+      <br />
+      <br />
       {/* Cards */}
-
       <Row gutter={[16, 16]}>{renderCards}</Row>
 
       <br />
