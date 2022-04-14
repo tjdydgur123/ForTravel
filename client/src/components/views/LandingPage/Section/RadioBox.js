@@ -24,8 +24,8 @@ function RadioBox(props) {
 
   return (
     <div>
-      <Collapse defaultActiveKey={["1"]}>
-        <Panel header="Prices" key="1">
+      <Collapse defaultActiveKey={["0"]}>
+        <Panel header="Price" key="1">
           {props.list && props.list.map((price) => renderRadioboxLists(price))}
         </Panel>
       </Collapse>
