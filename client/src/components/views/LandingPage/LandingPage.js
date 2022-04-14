@@ -3,6 +3,9 @@ import axios from "axios";
 import { Col, Card, Row, Button } from "antd";
 import { RocketOutlined } from "@ant-design/icons";
 import ImageSlider from "../../utils/ImageSlider";
+import CheckBox from "./Section/CheckBox";
+import RadioBox from "./Section/RadioBox";
+import { continents, price } from "./Section/Datas";
 
 const { Meta } = Card;
 
@@ -11,6 +14,12 @@ function LandingPage() {
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
   const [PostSize, setPostSize] = useState(0);
+  const [Filters, setFilters] = useState([
+    {
+      continents: [],
+      price: [],
+    },
+  ]);
 
   useEffect(() => {
     let body = {
@@ -22,8 +31,6 @@ function LandingPage() {
   }, []);
 
   const renderCards = Products.map((product, index) => {
-    console.log(product);
-
     return (
       <Col key={index} lg={6} md={8} xs={24}>
         <Card hoverable cover={<ImageSlider images={product.images} />}>
@@ -61,6 +68,43 @@ function LandingPage() {
     setSkip(skip);
   };
 
+  const showFilterResults = (filters) => {
+    let body = {
+      skip: 0,
+      limit: Limit,
+      filters: filters,
+    };
+    getProducts(body);
+    setSkip(0);
+  };
+
+  const handelPrice = (value) => {
+    const data = price;
+    let array = [];
+
+    for (let key in data) {
+      if (data[key]._id === parseInt(value, 10)) {
+        array = data[key].array;
+      }
+    }
+
+    return array;
+  };
+
+  const handleFilters = (filters, category) => {
+    const newFilters = { ...Filters };
+
+    newFilters[category] = filters;
+
+    if (category === "price") {
+      let priceValues = handelPrice(filters);
+      newFilters[category] = priceValues;
+    }
+
+    showFilterResults(newFilters);
+    setFilters(newFilters);
+  };
+
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
@@ -71,9 +115,29 @@ function LandingPage() {
 
       {/* Filter */}
 
-      {/* Search */}
+      <Row gutter={[16, 16]}>
+        <Col lg={12} xs={24}>
+          {/* CheckBox */}
+          <CheckBox
+            list={continents}
+            handleFilters={(filters) => handleFilters(filters, "continents")}
+          />
+        </Col>
 
-      <Row gutter={(16, 16)}>{renderCards}</Row>
+        <Col lg={12} xs={24}>
+          {/* RadioBox */}
+          <RadioBox
+            list={price}
+            handleFilters={(filters) => handleFilters(filters, "price")}
+          />
+        </Col>
+      </Row>
+
+      {/* Search */}
+      <br />
+      {/* Cards */}
+
+      <Row gutter={[16, 16]}>{renderCards}</Row>
 
       <br />
 
