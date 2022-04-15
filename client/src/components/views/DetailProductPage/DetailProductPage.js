@@ -9,7 +9,7 @@ function DetailProductPage(props) {
   console.log(Product);
   // getting productId from current URL
   const productId = props.match.params.productId;
-  //   console.log(props.match.params.productId);
+  // console.log(props.match.params.productId);
 
   useEffect(() => {
     axios
@@ -30,6 +30,8 @@ function DetailProductPage(props) {
         <h1>{Product.title}</h1>
       </div>
 
+      <br />
+
       <Row gutter={[16, 16]}>
         <Col lg={12} sm={24}>
           {/* ProductImage */}
@@ -38,7 +40,7 @@ function DetailProductPage(props) {
 
         <Col lg={12} sm={24}>
           {/* ProductInfo */}
-          <ProductInfo />
+          <ProductInfo detail={Product} />
         </Col>
       </Row>
     </div>
