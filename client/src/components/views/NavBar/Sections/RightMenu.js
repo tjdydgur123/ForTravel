@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Affix, Button } from "antd";
+import { Affix, Button, Menu, Badge } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { USER_SERVER } from "../../../Config";
 import { withRouter } from "react-router-dom";
@@ -48,6 +49,25 @@ function RightMenu(props) {
   } else {
     return (
       <div style={{ display: "flex" }}>
+        <Menu mode="horizontal" style={{ paddingBottom: 3 }}>
+          <Menu.Item
+            key="cart"
+            icon={
+              <Badge count={5}>
+                <a
+                  href="/user/cart"
+                  className="head-example"
+                  style={{ color: "#667777" }}
+                >
+                  <ShoppingCartOutlined
+                    style={{ fontSize: 30, marginBottom: 3 }}
+                  />
+                </a>
+              </Badge>
+            }
+          />
+        </Menu>
+        <div style={{ width: "15px" }} />
         <Affix>
           <Button
             type="primary"

@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import { Descriptions, Button } from "antd";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../../_actions/user_actions";
