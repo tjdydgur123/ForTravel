@@ -77,10 +77,10 @@ export function getCartItems(cartItems, userCart) {
       // Quantity 정보를 넣어준다
 
       userCart.forEach((cartItem) => {
-        response.data.product.forEach((productDetail, index) => {
+        response.data.forEach((productDetail, index) => {
           if (cartItem._id === productDetail._id) {
             // add quantity data into the product Detail data
-            response.data.product[index].quantity = cartItem.quantity;
+            response.data[index].quantity = cartItem.quantity;
           }
         });
       });

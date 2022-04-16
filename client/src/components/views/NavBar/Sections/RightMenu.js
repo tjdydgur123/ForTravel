@@ -49,7 +49,7 @@ function RightMenu(props) {
   } else {
     return (
       <div style={{ display: "flex" }}>
-        <Menu mode="horizontal" style={{ paddingBottom: 3 }}>
+        <Menu mode="horizontal">
           <Menu.Item
             key="cart"
             icon={
