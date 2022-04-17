@@ -8,12 +8,12 @@ function ProductImage(props) {
     if (props.detail.images && props.detail.images.length > 0) {
       let images = [];
 
-      props.detail.images.map((item) => {
+      props.detail.images.map((item) =>
         images.push({
           original: `http://localhost:4000/${item}`,
           thumbnail: `http://localhost:4000/${item}`,
-        });
-      });
+        })
+      );
       setImages(images);
     }
   }, [props.detail]);
