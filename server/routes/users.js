@@ -225,4 +225,11 @@ router.post("/successBuy", auth, (req, res) => {
   );
 });
 
+router.get("/history", auth, (req, res) => {
+  User.find({ _id: req.user._id }, (err, user) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res.status(200).json({ success: true, user });
+  });
+});
+
 module.exports = router;

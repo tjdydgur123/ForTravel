@@ -67,6 +67,16 @@ function RightMenu(props) {
             }
           />
         </Menu>
+        <Affix>
+          <Button
+            type="primary"
+            onClick={() => {
+              props.history.push("/history");
+            }}
+          >
+            History
+          </Button>
+        </Affix>
         <div style={{ width: "15px" }} />
         <Affix>
           <Button
