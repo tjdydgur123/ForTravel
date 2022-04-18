@@ -10,8 +10,14 @@ function ProductImage(props) {
 
       props.detail.images.map((item) =>
         images.push({
-          original: `http://localhost:4000/${item}`,
-          thumbnail: `http://localhost:4000/${item}`,
+          original:
+            process.env.NODE_ENV === "development"
+              ? `http://localhost:4000/${item}`
+              : `https://fortravel.herokuapp.com/${item}`,
+          thumbnail:
+            process.env.NODE_ENV === "development"
+              ? `http://localhost:4000/${item}`
+              : `https://fortravel.herokuapp.com/${item}`,
         })
       );
       setImages(images);

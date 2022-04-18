@@ -5,7 +5,11 @@ function UserCardBlock(props) {
   const renderCartImage = (images) => {
     if (images.length > 0) {
       let image = images[0];
-      return `http://localhost:4000/${image}`;
+      let url =
+        process.env.NODE_ENV === "development"
+          ? `http://localhost:4000/${image}`
+          : `https://fortravel.herokuapp.com/${image}`;
+      return url;
     }
   };
 

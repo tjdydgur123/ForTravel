@@ -10,7 +10,11 @@ function ImageSlider(props) {
             <div key={index}>
               <img
                 style={{ width: "100%", maxHeight: "150px" }}
-                src={`http://localhost:4000/${image}`}
+                src={
+                  process.env.NODE_ENV === "development"
+                    ? `http://localhost:4000/${image}`
+                    : `https://fortravel.herokuapp.com/${image}`
+                }
                 alt=""
               />
             </div>
