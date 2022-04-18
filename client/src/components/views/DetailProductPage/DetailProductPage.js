@@ -9,7 +9,6 @@ function DetailProductPage(props) {
 
   // getting productId from current URL
   const productId = props.match.params.productId;
-  // console.log(props.match.params.productId);
 
   useEffect(() => {
     axios
